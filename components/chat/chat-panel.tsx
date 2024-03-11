@@ -1,13 +1,13 @@
-import * as React from 'react'
 import { type UseChatHelpers } from 'ai/react'
+import * as React from 'react'
 
 import { shareChat } from '@/app/actions'
-import { Button } from '@/components/ui/button'
-import { PromptForm } from '@/components/prompt-form'
 import { ButtonScrollToBottom } from '@/components/button-scroll-to-bottom'
-import { IconRefresh, IconShare, IconStop } from '@/components/ui/icons'
+import { ChatShareDialog } from '@/components/chat/chat-share-dialog'
 import { FooterText } from '@/components/footer'
-import { ChatShareDialog } from '@/components/chat-share-dialog'
+import { PromptForm } from '@/components/prompt-form'
+import { Button } from '@/components/ui/button'
+import { IconRefresh, IconShare, IconStop } from '@/components/ui/icons'
 
 export interface ChatPanelProps
   extends Pick<
@@ -84,7 +84,7 @@ export function ChatPanel({
             )
           )}
         </div>
-        <div className="px-4 py-2 space-y-4 border-t shadow-lg bg-background sm:rounded-t-xl sm:border md:py-4">
+        <div className="px-0 py-8 space-y-4">
           <PromptForm
             onSubmit={async value => {
               await append({

@@ -1,9 +1,10 @@
-import { kv } from '@vercel/kv'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import OpenAI from 'openai'
 
 import { auth } from '@/auth'
 import { nanoid } from '@/lib/utils'
+import { db } from '@/db'
+import { countries } from '@/db/schema'
 
 export const runtime = 'edge'
 
@@ -16,11 +17,19 @@ export async function POST(req: Request) {
   const { messages, previewToken } = json
   const userId = (await auth())?.user.id
 
-  if (!userId) {
-    return new Response('Unauthorized', {
-      status: 401
-    })
-  }
+
+  console.log('userId', userId)
+  // const data = await db.insert(countries).values({
+  //   name: 'test'
+  // })
+
+  // console.log(data)
+
+  // if (!userId) {
+  //   return new Response('Unauthorized', {
+  //     status: 401
+  //   })
+  // }
 
   if (previewToken) {
     openai.apiKey = previewToken
@@ -53,11 +62,11 @@ export async function POST(req: Request) {
           }
         ]
       }
-      await kv.hmset(`chat:${id}`, payload)
-      await kv.zadd(`user:chat:${userId}`, {
-        score: createdAt,
-        member: `chat:${id}`
-      })
+      // await kv.hmset(`chat:${id}`, payload)
+      // await kv.zadd(`user:chat:${userId}`, {
+      //   score: createdAt,
+      //   member: `chat:${id}`
+      // })
     }
   })
 

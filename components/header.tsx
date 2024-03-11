@@ -11,9 +11,9 @@ import {
   IconVercel
 } from '@/components/ui/icons'
 import { UserMenu } from '@/components/user-menu'
-import { SidebarMobile } from './sidebar-mobile'
-import { SidebarToggle } from './sidebar-toggle'
-import { ChatHistory } from './chat-history'
+import { SidebarMobile } from './sidebar/sidebar-mobile'
+import { SidebarToggle } from './sidebar/sidebar-toggle'
+import { ChatHistory } from './chat/chat-history'
 
 async function UserOrLogin() {
   const session = await auth()
